@@ -31,4 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'dummy_json_api' => [
+        'base_uri' => env('DUMMY_JSON_API_URI'),
+    ]
 ];
