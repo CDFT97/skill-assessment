@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuoteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+    // Quotes
+    Route::get("/quotes/fiverandom", [QuoteController::class, "fiveRandom"])->name('quotes.fiverandom');
+    Route::post("/quotes/fiverandom", [QuoteController::class, "store"])->name('quotes.store');
 });
 
 require __DIR__ . '/auth.php';
