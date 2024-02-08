@@ -23,6 +23,11 @@ class QuoteController extends Controller
         $this->quoteRepository = $quoteRepository;
     }
 
+    /**
+     * Gets random quotes from the api, otherwise a quantity is determined, default is 5.
+     *
+     * @param int $quantity 
+     */
     public function randomQuotes(int $quantity = 5)
     {
         $res_from_api = $this->dummyQuoteService->getRandomQuotes($quantity);
@@ -36,6 +41,10 @@ class QuoteController extends Controller
         return Inertia::render('Quotes/FiveRandom', compact('quotes', 'fav_quotes_id_list'));
     }
 
+    /**
+     * Adds the quote brought from the api to the database (favorite quote of each user)
+     *
+     */
     public function store(QuoteStoreRequest $request)
     {
         $data = $request->validated();
@@ -55,6 +64,9 @@ class QuoteController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Get favorite quotes of the current user
+     */
     public function myFavorites()
     {
         $fav_quotes = $this->quoteRepository->getByUserId(auth()->id());
@@ -66,6 +78,9 @@ class QuoteController extends Controller
         return Inertia::render('Quotes/MyFavorites', compact('fav_quotes'));
     }
 
+    /**
+     * Removes the quote from the database (favorite quotes of each user)
+     */
     public function destroy(Quote $quote_id)
     {
         try {
