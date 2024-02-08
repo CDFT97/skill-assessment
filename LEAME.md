@@ -11,7 +11,7 @@ El desafío contendrá algunas características fundamentales que la mayoría de
 La API a la que queremos que te conectes es [https://dummyjson.com/docs/quotes](https://dummyjson.com/docs/quotes)
 
 ### La aplicación debe tener las siguientes características:
-1. Autenticación de usuario y página de actualización de perfil
+1. Autenticación de usuario y página de actualización de perfil ✅
 2. Una página que muestre 5 citas aleatorias
     * Debe haber un botón para actualizar las citas
     * Debe haber un botón junto a cada cita para guardarla en tus favoritos
@@ -31,8 +31,8 @@ La API a la que queremos que te conectes es [https://dummyjson.com/docs/quotes](
 * Usar Composition API y setup script en componentes de Vue
 
 ## Desarrollador
-Nombre: `<tu nombre>` <br/>
-Correo electrónico: `<tu correo electrónico>`<br/>
+Nombre: Cesar Febres <br/>
+Correo electrónico: febrescesar7@gmail.com<br/>
 
 ## Instrucciones
 ### NO INICIES UNA NUEVA APLICACIÓN LARAVEL, ¡UTILIZA ESTE ESQUELETO EN SU LUGAR!
