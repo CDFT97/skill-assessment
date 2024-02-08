@@ -23,13 +23,13 @@ class QuoteController extends Controller
         $this->quoteRepository = $quoteRepository;
     }
 
-    public function fiveRandom()
+    public function randomQuotes(int $quantity = 5)
     {
-        $res_from_api = $this->dummyQuoteService->getRandomQuotes();
+        $res_from_api = $this->dummyQuoteService->getRandomQuotes($quantity);
         $quotes = $res_from_api->quotes;
         $fav_quotes_id_list = $this->quoteRepository->getIdListByUserId(auth()->id());
 
-        if(request()->wantsJson()) {
+        if(request()->is('api/*')) {
             return response()->json($quotes, Response::HTTP_OK);
         }
 
@@ -48,7 +48,7 @@ class QuoteController extends Controller
 
         $this->quoteRepository->save($quote);
 
-        if($request->wantsJson()) {
+        if(request()->is('api/*')) {
             return response()->json($quote, Response::HTTP_CREATED);
         }
 
@@ -59,7 +59,7 @@ class QuoteController extends Controller
     {
         $fav_quotes = $this->quoteRepository->getByUserId(auth()->id());
 
-        if(request()->wantsJson()) {
+        if(request()->is('api/*')) {
             return response()->json($fav_quotes, Response::HTTP_OK);
         }
 
@@ -71,7 +71,7 @@ class QuoteController extends Controller
         try {
             $this->quoteRepository->delete($quote_id);
     
-            if(request()->wantsJson()) {
+            if(request()->is('api/*')) {
                 return response()->json(null, Response::HTTP_NO_CONTENT);
             }
     

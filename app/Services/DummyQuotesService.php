@@ -20,7 +20,7 @@ class DummyQuotesService
     return json_decode($response);
   }
 
-  public function getRandomQuotes(int $quantity = 5)
+  public function getRandomQuotes(int $quantity)
   {
     return $this->makeRequest(
       'GET',

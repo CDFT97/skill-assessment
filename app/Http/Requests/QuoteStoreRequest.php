@@ -35,7 +35,7 @@ class QuoteStoreRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if(request()->wantsJson()) {
+        if(request()->is('api/*')) {
             throw new HttpResponseException(response()->json([
                 'errors' => $validator->errors(),
                 'status' => true

@@ -18,13 +18,13 @@ La API a la que queremos que te conectes es [https://dummyjson.com/docs/quotes](
 3. Una página que muestre tus favoritos guardados. Debe haber un botón para eliminar una cita de tus favoritos ✅
 4. Implementar límites de velocidad para las solicitudes de la API a `https://dummyjson.com/quotes` para evitar el abuso. La API debe estar limitada a 30 solicitudes por minuto.
 5. Autenticación de administrador por separado para moderar las citas de usuario guardadas y prohibir usuarios
-6. El frontend debe hacerse con Vue.js y opcionalmente Inertia.js
-    * TypeScript debe usarse para cualquier funcionalidad del frontend
-    * La interfaz de usuario debe ser receptiva
-7. Debe estar disponible una ruta de API para recuperar un número especificado de citas aleatorias de Kayne West
-8. Debe estar disponible una ruta de API para recuperar tus citas favoritas
-9. Debe estar disponible una ruta de API para eliminar una cita de tus favoritos
-10. Todas las rutas de la API deben estar aseguradas con un token de usuario
+6. El frontend debe hacerse con Vue.js y opcionalmente Inertia.js ✅
+    * TypeScript debe usarse para cualquier funcionalidad del frontend ✅
+    * La interfaz de usuario debe ser receptiva ✅
+7. Debe estar disponible una ruta de API para recuperar un número especificado de citas aleatorias de Kayne West ✅
+8. Debe estar disponible una ruta de API para recuperar tus citas favoritas ✅
+9. Debe estar disponible una ruta de API para eliminar una cita de tus favoritos ✅
+10. Todas las rutas de la API deben estar aseguradas con un token de usuario ✅
 11. Todas las características anteriores deben probarse con pruebas de características
 
 #### Extra Credit
