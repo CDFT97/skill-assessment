@@ -45,4 +45,14 @@ class User extends Authenticatable
 
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
+
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
+    }
 }

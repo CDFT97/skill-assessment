@@ -10,5 +10,9 @@ class Quote extends Model
     use HasFactory;
 
     protected $fillable = ['quote', 'author', 'external_id'];
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
