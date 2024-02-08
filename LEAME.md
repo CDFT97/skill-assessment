@@ -15,7 +15,7 @@ La API a la que queremos que te conectes es [https://dummyjson.com/docs/quotes](
 2. Una página que muestre 5 citas aleatorias ✅
     * Debe haber un botón para actualizar las citas ✅
     * Debe haber un botón junto a cada cita para guardarla en tus favoritos ✅
-3. Una página que muestre tus favoritos guardados. Debe haber un botón para eliminar una cita de tus favoritos
+3. Una página que muestre tus favoritos guardados. Debe haber un botón para eliminar una cita de tus favoritos ✅
 4. Implementar límites de velocidad para las solicitudes de la API a `https://dummyjson.com/quotes` para evitar el abuso. La API debe estar limitada a 30 solicitudes por minuto.
 5. Autenticación de administrador por separado para moderar las citas de usuario guardadas y prohibir usuarios
 6. El frontend debe hacerse con Vue.js y opcionalmente Inertia.js

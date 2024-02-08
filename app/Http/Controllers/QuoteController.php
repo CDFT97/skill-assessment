@@ -8,6 +8,7 @@ use App\Http\Requests\StoreQuoteRequest;
 use App\Http\Requests\UpdateQuoteRequest;
 use App\Repositories\QuoteRepository;
 use App\Services\DummyQuotesService;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,5 +53,31 @@ class QuoteController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function myFavorites()
+    {
+        $fav_quotes = $this->quoteRepository->getByUserId(auth()->id());
+
+        if(request()->wantsJson()) {
+            return response()->json($fav_quotes, Response::HTTP_OK);
+        }
+
+        return Inertia::render('Quotes/MyFavorites', compact('fav_quotes'));
+    }
+
+    public function destroy(Quote $quote_id)
+    {
+        try {
+            $this->quoteRepository->delete($quote_id);
+    
+            if(request()->wantsJson()) {
+                return response()->json(null, Response::HTTP_NO_CONTENT);
+            }
+    
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+        }
     }
 }

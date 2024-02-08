@@ -38,8 +38,10 @@ Route::middleware('auth')->group(function () {
 
 
     // Quotes
-    Route::get("/quotes/fiverandom", [QuoteController::class, "fiveRandom"])->name('quotes.fiverandom');
-    Route::post("/quotes/fiverandom", [QuoteController::class, "store"])->name('quotes.store');
+    Route::get("/quotes/five-random", [QuoteController::class, "fiveRandom"])->name('quotes.fiverandom');
+    Route::get("/quotes/my-favorites", [QuoteController::class, "myFavorites"])->name('quotes.myfavorites');
+    Route::post("/quotes/store", [QuoteController::class, "store"])->name('quotes.store');
+    Route::delete("/quotes/remove/{quote_id}", [QuoteController::class, "destroy"])->name('quotes.destroy');
 });
 
 require __DIR__ . '/auth.php';

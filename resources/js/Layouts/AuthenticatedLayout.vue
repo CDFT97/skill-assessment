@@ -38,6 +38,12 @@ const showingNavigationDropdown = ref(false);
                                     Five Random Quotes
                                 </NavLink>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('quotes.myfavorites')" :active="route().current('quotes.myfavorites')">
+                                    My Favorites
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">

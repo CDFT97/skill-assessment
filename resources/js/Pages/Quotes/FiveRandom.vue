@@ -1,5 +1,5 @@
 <template>
-  <Head title="Dashboard" />
+  <Head title="Five Random" />
 
   <AuthenticatedLayout>
     <template #header>
@@ -28,9 +28,9 @@
                 <tr v-for="quote in props.quotes" :key="quote.id">
                   <td>{{ quote.quote }}</td>
                   <td>{{ quote.author }}</td>
-                  <td class="text-center" v-if="!exists_in_favorites(quote)">
+                  <td class="text-center" v-if="!existsInFavorites(quote)">
                     <PrimaryButton 
-                      @click="add_to_favorites(quote)" 
+                      @click="addToFavorites(quote)" 
                       :disabled="form.processing"
                     >
                       ❤️
@@ -62,7 +62,7 @@ const form = useForm({
   author: ""
 })
 
-const add_to_favorites = (quote: Quote) => {
+const addToFavorites = (quote: Quote) => {
   form.quote = quote.quote;
   form.id = quote.id;
   form.author = quote.author;
@@ -72,7 +72,7 @@ const add_to_favorites = (quote: Quote) => {
   })
 }
 
-const exists_in_favorites = (quote: Quote) => {
+const existsInFavorites = (quote: Quote) => {
   const id_str = quote.id.toString();
   return props.fav_quotes_id_list.includes(id_str);
 }
