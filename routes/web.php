@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,6 +48,11 @@ Route::middleware('auth')->group(function () {
     Route::get("/quotes/my-favorites", [QuoteController::class, "myFavorites"])->name('quotes.myfavorites');
     Route::post("/quotes/store", [QuoteController::class, "store"])->name('quotes.store');
     Route::delete("/quotes/remove/{quote_id}", [QuoteController::class, "destroy"])->name('quotes.destroy');
+
+    // ADMIN ROUTES
+    Route::middleware('admin')->prefix('admin')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+    });
 });
 
 require __DIR__ . '/auth.php';
