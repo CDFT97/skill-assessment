@@ -127,6 +127,18 @@ const showingNavigationDropdown = ref(false);
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
+            
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('quotes.fiverandom')" :active="route().current('quotes.fiverandom')">
+                            Five Random Quotes
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('quotes.myfavorites')" :active="route().current('quotes.myfavorites')">
+                            My Favorites
+                        </ResponsiveNavLink>
+                    </div>
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

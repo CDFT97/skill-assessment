@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\AdminLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -51,5 +52,26 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+    /**
+     * Display the login view for admin.
+     */
+    public function adminLogin(): Response
+    {
+        return Inertia::render('Auth/AdminLogin', [
+            'canResetPassword' => Route::has('password.request'),
+            'status' => session('status'),
+        ]);
+    }
+
+    public function adminCreate(AdminLoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->onlyForAdmin();
+        
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

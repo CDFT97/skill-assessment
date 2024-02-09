@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
 use Illuminate\Foundation\Application;
@@ -25,6 +26,10 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
+Route::get('/admin/login', [AuthenticatedSessionController::class, 'adminLogin'])->name('admin.login');
+Route::post('/admin/login/create', [AuthenticatedSessionController::class, 'adminCreate'])->name('admin.create.login');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
