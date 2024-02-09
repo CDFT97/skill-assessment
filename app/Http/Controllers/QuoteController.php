@@ -31,14 +31,29 @@ class QuoteController extends Controller
     public function randomQuotes(int $quantity = 5)
     {
         $res_from_api = $this->dummyQuoteService->getRandomQuotes($quantity);
-        $quotes = $res_from_api->quotes;
         $fav_quotes_id_list = $this->quoteRepository->getIdListByUserId(auth()->id());
+        $quotes = [];
+        $rate_limit_reached = false;
 
-        if(request()->is('api/*')) {
+        // If boolean, it means that the limit of requests per minute has been reached.
+        if (gettype($res_from_api) == 'boolean') {
+
+            $rate_limit_reached = true;
+            if (request()->is('api/*')) {
+                return response()->json(["message" => "Too many requests please wait a minute"], Response::HTTP_TOO_MANY_REQUESTS);
+            }
+
+            return Inertia::render('Quotes/FiveRandom', compact('quotes', 'fav_quotes_id_list', 'rate_limit_reached'));
+        }
+
+
+        $quotes = $res_from_api->quotes;
+
+        if (request()->is('api/*')) {
             return response()->json($quotes, Response::HTTP_OK);
         }
 
-        return Inertia::render('Quotes/FiveRandom', compact('quotes', 'fav_quotes_id_list'));
+        return Inertia::render('Quotes/FiveRandom', compact('quotes', 'fav_quotes_id_list', 'rate_limit_reached'));
     }
 
     /**
@@ -57,7 +72,7 @@ class QuoteController extends Controller
 
         $this->quoteRepository->save($quote);
 
-        if(request()->is('api/*')) {
+        if (request()->is('api/*')) {
             return response()->json($quote, Response::HTTP_CREATED);
         }
 
@@ -71,7 +86,7 @@ class QuoteController extends Controller
     {
         $fav_quotes = $this->quoteRepository->getByUserId(auth()->id());
 
-        if(request()->is('api/*')) {
+        if (request()->is('api/*')) {
             return response()->json($fav_quotes, Response::HTTP_OK);
         }
 
@@ -85,11 +100,11 @@ class QuoteController extends Controller
     {
         try {
             $this->quoteRepository->delete($quote_id);
-    
-            if(request()->is('api/*')) {
+
+            if (request()->is('api/*')) {
                 return response()->json(null, Response::HTTP_NO_CONTENT);
             }
-    
+
             return redirect()->back();
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

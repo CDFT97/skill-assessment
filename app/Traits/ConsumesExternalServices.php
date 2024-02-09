@@ -2,12 +2,29 @@
 
 namespace App\Traits;
 
+use App\Repositories\QuoteRepository;
 use GuzzleHttp\Client;
 
 trait ConsumesExternalServices
 {
+
+  protected $quoteRepository;
+
+  public function __construct(QuoteRepository $quoteRepository)
+  {
+    $this->quoteRepository = $quoteRepository;
+  }
+
   public function makeRequest(string $method, string $requestUrl, array $queryParams = [], array $formParams = [], array $headers = [], bool $isJsonRequest = false)
   {
+    if(method_exists($this, 'canMakeRequest')) {
+      $canMakeRequest = $this->canMakeRequest();
+
+      if(!$canMakeRequest) {
+        return false;
+      }
+    }
+
     $client = new Client([
       'base_uri' => $this->baseUri,
     ]);

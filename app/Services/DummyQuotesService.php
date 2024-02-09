@@ -34,4 +34,9 @@ class DummyQuotesService
       $isJsonRequest = true
     );
   }
+
+  public function canMakeRequest()
+  {
+    return false;
+  }
 }

@@ -10,7 +10,16 @@
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+
+        <DangerAlert 
+          class="mb-2"
+          title="OPS" 
+          message="Rate Limit Reached, please try again in few minutes" 
+          v-if="props.rate_limit_reached"
+        >
+        </DangerAlert>
+
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg" v-else>
           <div class="p-6 text-gray-900 dark:text-gray-100">
             <Link :href="route('quotes.fiverandom')">
               <PrimaryButton >Update Quotes</PrimaryButton>
@@ -51,9 +60,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import Quote from "@/Quote";
 import PrimaryButton from "@/Components/PrimaryButton.vue"
+import DangerAlert from "@/Components/DangerAlert.vue"
 const props = defineProps({
   quotes: Array<Quote>,
-  fav_quotes_id_list: Array<number> 
+  fav_quotes_id_list: Array<number> ,
+  rate_limit_reached: Boolean
 })
 
 const form = useForm({
