@@ -2,20 +2,13 @@
 
 namespace App\Traits;
 
-use App\Repositories\QuoteRepository;
+use App\Repositories\ApiRateLimitRepository;
 use GuzzleHttp\Client;
 
 trait ConsumesExternalServices
 {
 
-  protected $quoteRepository;
-
-  public function __construct(QuoteRepository $quoteRepository)
-  {
-    $this->quoteRepository = $quoteRepository;
-  }
-
-  public function makeRequest(string $method, string $requestUrl, array $queryParams = [], array $formParams = [], array $headers = [], bool $isJsonRequest = false)
+  public function makeRequest(string $method, string $requestUrl, array $queryParams = [], array $formParams = [], array $headers = [], bool $isJsonRequest = false, string $apiUrlToRate)
   {
     if(method_exists($this, 'canMakeRequest')) {
       $canMakeRequest = $this->canMakeRequest();
@@ -45,6 +38,9 @@ trait ConsumesExternalServices
       $response = $this->decodeResponse($response);
     }
 
+    $rateLimitRepository = resolve(ApiRateLimitRepository::class);
+    $rateLimitRepository->incrementCounter($apiUrlToRate);
+    
     return $response;
   }
 }

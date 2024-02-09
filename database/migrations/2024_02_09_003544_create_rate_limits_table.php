@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quotes', function (Blueprint $table) {
+        Schema::create('api_rate_limits', function (Blueprint $table) {
             $table->id();
-            $table->longText('quote');
-            $table->string('author');
-            $table->string('external_id');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('api_url')->unique();
+            $table->integer('count');
+            $table->integer('limit_per_minute');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes');
+        Schema::dropIfExists('rate_limits');
     }
 };

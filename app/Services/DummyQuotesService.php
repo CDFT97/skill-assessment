@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\ApiRateLimitRepository;
 use App\Traits\ConsumesExternalServices;
 
 class DummyQuotesService
@@ -9,10 +10,13 @@ class DummyQuotesService
   use ConsumesExternalServices;
 
   protected $baseUri;
+  protected $apiRateLimitRepository;
 
-  public function __construct()
+  public function __construct(ApiRateLimitRepository $apiRateLimitRepository)
   {
     $this->baseUri = config('services.dummy_json_api.base_uri');
+    $this->URL = $this->baseUri."/quotes";
+    $this->apiRateLimitRepository = $apiRateLimitRepository;
   }
 
   public function decodeResponse($response)
@@ -31,12 +35,13 @@ class DummyQuotesService
       ],
       [],
       [],
-      $isJsonRequest = true
+      $isJsonRequest = true,
+      $apiUrlToRate = $this->URL
     );
   }
 
   public function canMakeRequest()
   {
-    return false;
+    return $this->apiRateLimitRepository->limitHasBeenReached($this->URL);
   }
 }

@@ -32,4 +32,9 @@ class BaseRepository
   {
     return $model->delete();
   }
+  
+  public function first()
+  {
+    return $this->model->first();
+  }
 }
