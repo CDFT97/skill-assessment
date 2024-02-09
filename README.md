@@ -220,3 +220,37 @@ composer test
 ```
 
 </details>
+
+<summary>To test the app locally</summary>
+
+### Composer Commands
+```shell
+composer i
+```
+
+
+### Node command
+```shell
+npm i
+```
+
+### PHP commands
+```shell
+php artisan migrate:fresh --seed
+php artisan schedule:work
+php artisan serve
+```
+
+### Node run
+```shell
+npm run dev
+// or
+npm run build
+```
+
+### Running Tests
+```shell
+composer test
+```
+
+</details>
