@@ -19,6 +19,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Fav Quotes</th>
                   <th>Status</th>
                   <th>BAN/UNBAN</th>
                 </tr>
@@ -27,13 +28,24 @@
                 <tr v-for="user in props.users" :key="user.id">
                   <td>{{ user.name }}</td>
                   <td>{{ user.email }}</td>
-                  <td>{{ user.status }}</td>
                   <td class="text-center">
-                    <PrimaryButton v-if="user.status === 'banned'">
-                      UNBAN
+                    <PrimaryButton>
+                      👁️
                     </PrimaryButton>
-                    <DangerButton v-else>
-                      BAN
+                  </td>
+                  <td class="text-center">
+                    <p class="uppercase font-bold"
+                      :class="user.status === 'inactive' ? 'text-red-500' : 'text-green-500'">
+                      {{ user.status }}
+                    </p>
+                  </td>
+
+                  <td class="text-center">
+                    <PrimaryButton v-if="user.status === 'inactive'" @click="updateStatus(user.id, 'active')">
+                      Enable
+                    </PrimaryButton>
+                    <DangerButton v-else @click="updateStatus(user.id, 'inactive')">
+                      Disable
                     </DangerButton>
                   </td>
                 </tr>
@@ -48,7 +60,7 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue"
 import DangerButton from "@/Components/DangerButton.vue"
 import User from "@/User";
@@ -57,11 +69,18 @@ const props = defineProps({
   users: Array<User>,
 })
 
-console.log(props.users)
-
 const form = useForm({
-
+  user_id: 0,
+  status: "",
 })
 
+const updateStatus = (id: number, status: string) => {
+  form.user_id = id;
+  form.status = status;
 
+  form.put(route("admin.users.update.status"), {
+    preserveScroll: true,
+    onSuccess: () => form.reset(),
+  });
+}
 </script>

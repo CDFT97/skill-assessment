@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateStatusRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,5 +19,14 @@ class UserController extends Controller
     {
         $users = $this->userRepository->getUsersRole();
         return Inertia::render("Admin/Users", compact('users'));
+    }
+
+    public function updateStatus(UserUpdateStatusRequest $request)
+    {
+        $data = $request->validated();
+        $user = $this->userRepository->get($data['user_id']);
+        $user->status = $data['status'];
+        $this->userRepository->save($user);
+        return redirect()->back();
     }
 }

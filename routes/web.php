@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     // ADMIN ROUTES
     Route::middleware('admin')->prefix('admin')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+        Route::put('/users/update-status', [UserController::class, 'updateStatus'])->name('admin.users.update.status');
     });
 });
 
