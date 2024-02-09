@@ -29,9 +29,7 @@
                   <td>{{ user.name }}</td>
                   <td>{{ user.email }}</td>
                   <td class="text-center">
-                    <PrimaryButton>
-                      👁️
-                    </PrimaryButton>
+                    <Link :href="route('admin.users.quotes', user.id)" >Watch {{ user.quotes.length }} quotes</Link>
                   </td>
                   <td class="text-center">
                     <p class="uppercase font-bold"
@@ -60,11 +58,10 @@
 
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue"
 import DangerButton from "@/Components/DangerButton.vue"
 import User from "@/User";
-
 const props = defineProps({
   users: Array<User>,
 })

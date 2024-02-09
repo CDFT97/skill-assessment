@@ -29,4 +29,11 @@ class UserController extends Controller
         $this->userRepository->save($user);
         return redirect()->back();
     }
+
+    public function userQuotes(int $user_id)
+    {
+        $user = $this->userRepository->get($user_id);
+        $quotes = $user->quotes;
+        return Inertia::render("Admin/UserQuotes", compact('user', 'quotes'));
+    }
 }

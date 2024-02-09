@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('admin')->prefix('admin')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
         Route::put('/users/update-status', [UserController::class, 'updateStatus'])->name('admin.users.update.status');
+        Route::get('users/quotes/{user_id}', [UserController::class, 'userQuotes'])->name('admin.users.quotes');
     });
 });
 

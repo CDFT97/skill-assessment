@@ -12,30 +12,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-100">
-          
-          <table class="table-auto w-full">
-            <thead class="text-center">
-              <tr>
-                <th>Quote</th>
-                <th>Author</th>
-                <th>Add to Favorites</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="quote in props.fav_quotes" :key="quote.id">
-                <td>{{ quote.quote }}</td>
-                <td>{{ quote.author }}</td>
-                <td class="text-center">
-                  <PrimaryButton 
-                    @click="removeFromFavorites(quote)" 
-                    :disabled="form.processing"
-                  >
-                    ❌
-                  </PrimaryButton>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <FavQuotesTable :fav_quotes="props.fav_quotes"></FavQuotesTable>
         </div>
       </div>
     </div>
@@ -44,24 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import FavoriteQuote from "@/FavoriteQuote";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-
+import FavQuotesTable from "../Quotes/FavQuotesTable.vue";
 
 const props = defineProps({
   fav_quotes: Array<FavoriteQuote>,
 })
-const form = useForm({});
-
-const removeFromFavorites = (quote: FavoriteQuote) => {
-  const confirmation = confirm("Are you sure you want to remove this quote from your favorites?");
-  if (confirmation) {
-    form.delete(route("quotes.destroy", quote.id), {
-      onSuccess: () => alert("Removed from favorites 😎👍"),
-    })
-  }
-}
 
 </script>

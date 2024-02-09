@@ -69,13 +69,13 @@ class LoginRequest extends FormRequest
 
     public function isActiveUser(): void
     {
-        RateLimiter::hit($this->throttleKey());
-
-        throw ValidationException::withMessages([
-            'email' => "Your account is not active. Please contact the administrator.",
-        ]);
         $user = User::where('email', $this->input('email'))->first();
+        
         if (!$user->isActive()) {
+            RateLimiter::hit($this->throttleKey());
+            throw ValidationException::withMessages([
+                'email' => "Your account is not active. Please contact the administrator.",
+            ]);
         }
 
         RateLimiter::clear($this->throttleKey());

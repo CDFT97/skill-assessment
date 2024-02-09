@@ -44,6 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['quotes'];
+
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
     const STATUS_ACTIVE = 'active';

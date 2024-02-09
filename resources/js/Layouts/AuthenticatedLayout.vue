@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -45,7 +45,7 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" v-if="$page.props.auth.user.role == 'admin'">
                                 <NavLink :href="route('admin.users.index')" :active="route().current('admin.users.index')">
                                     Users
                                 </NavLink>
@@ -146,7 +146,7 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                     </div>
 
-                    <div class="pt-2 pb-3 space-y-1">
+                    <div class="pt-2 pb-3 space-y-1" v-if="$page.props.auth.user.role == 'admin'">
                         <ResponsiveNavLink :href="route('admin.users.index')" :active="route().current('admin.users.index')">
                             Users
                         </ResponsiveNavLink>
