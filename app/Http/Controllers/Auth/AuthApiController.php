@@ -21,6 +21,10 @@ class AuthApiController extends Controller
 
         $user = User::where('email', request()->email)->first();
 
+        if(!$user->isActive()) {
+            return response()->json(['message' => 'Your account is not active. Please contact the administrator.'],Response::HTTP_UNAUTHORIZED );
+        }
+
         if (! $user || ! Hash::check(request()->password, $user->password)) {
             return response()->json(['message' => 'The provided credentials are incorrect.'],Response::HTTP_UNAUTHORIZED );
            
