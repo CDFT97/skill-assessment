@@ -13,9 +13,12 @@ class AuthenticationTest extends TestCase
 
     public function test_login_screen_can_be_rendered(): void
     {
-        $response = $this->get('/login');
-
-        $response->assertStatus(200);
+        $this->get('login')
+            ->assertOk()
+            ->assertInertia(
+                fn ($inertia) => $inertia
+                    ->component('Auth/Login')
+            );
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
