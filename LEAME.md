@@ -25,7 +25,7 @@ La API a la que queremos que te conectes es [https://dummyjson.com/docs/quotes](
 8. Debe estar disponible una ruta de API para recuperar tus citas favoritas ✅ 👍
 9. Debe estar disponible una ruta de API para eliminar una cita de tus favoritos ✅ 👍
 10. Todas las rutas de la API deben estar aseguradas con un token de usuario ✅ 👍
-11. Todas las características anteriores deben probarse con pruebas de características ❌
+11. Todas las características anteriores deben probarse con pruebas de características ❌ parcialmente completada.
 
 #### Extra Credit
 * Usar Composition API y setup script en componentes de Vue

@@ -36,21 +36,21 @@ Once you have completed all tasks, submit your work as instructed.
 
 
 ## The application must have the following features:
-1. User authentication and profile update page
-2. A page that shows 5 random quotes
-    1. There should be a button to refresh the quotes
-    2. There should be a button besides each quote to save it to your favorites
-3. A page that shows your saved favorites. There should be a button to delete a quote from your favorites
-4. Implement rate limiting for API requests to `https://dummyjson.com/quotes` preventing abuse. The API should be limited to 30 requests per minutes
-5. Separate admin authentication for moderating saved user quotes and banning users
-6. Frontend should be done with Vue.js and optionally Inertia.js
-    1. Typescript should be used for any frontend functionality
-    1. UI should be responsive
-7. An API route should be available to fetch a specified number of quotes random quotes
-8. An API route should be available to fetch your favorites quotes
-9. An API route should be available to delete a quote from your favorites
-10. All API route should be secured with an user token
-11. Above features are to be tested with Feature tests
+1. User authentication and profile update page ✅ 👍
+2. A page that shows 5 random quotes ✅
+    1. There should be a button to refresh the quotes ✅
+    2. There should be a button besides each quote to save it to your favorites ✅
+3. A page that shows your saved favorites. There should be a button to delete a quote from your favorites ✅
+4. Implement rate limiting for API requests to `https://dummyjson.com/quotes` preventing abuse. The API should be limited to 30 requests per minutes ✅
+5. Separate admin authentication for moderating saved user quotes and banning users ✅
+6. Frontend should be done with Vue.js and optionally Inertia.js ✅
+    1. Typescript should be used for any frontend functionality ✅
+    1. UI should be responsive ✅
+7. An API route should be available to fetch a specified number of quotes random quotes ✅ 👍
+8. An API route should be available to fetch your favorites quotes ✅ 👍
+9. An API route should be available to delete a quote from your favorites ✅ 👍
+10. All API route should be secured with an user token ✅ 👍
+11. Above features are to be tested with Feature tests ❌  partially complete
 
 #### Extra Credit
 * Use composition API and setup script for Vue components
@@ -234,6 +234,11 @@ composer i
 npm i
 ```
 
+### Database
+```
+create skill_assessment and skill_assessment_test databases.
+```
+
 ### PHP commands
 ```shell
 php artisan migrate:fresh --seed
@@ -250,7 +255,7 @@ npm run build
 
 ### Running Tests
 ```shell
-composer test
+php artisan test
 ```
 
 </details>
