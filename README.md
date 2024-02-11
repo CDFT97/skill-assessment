@@ -53,8 +53,8 @@ Once you have completed all tasks, submit your work as instructed.
 11. Above features are to be tested with Feature tests ❌  partially complete
 
 #### Extra Credit
-* Use composition API and setup script for Vue components
-* Use inertia to connect backend and frontend
+* Use composition API and setup script for Vue components ✅  
+* Use inertia to connect backend and frontend ✅ 
 
 ## Developer
 Name: Cesar Febres <br/>
