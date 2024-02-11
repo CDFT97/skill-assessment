@@ -11,7 +11,13 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array<int, string>
      */
+    // TODO: Add this urls only for test
     protected $except = [
-        //
+        '/login',
+        '/register',
+        'confirm-password',
+        'forgot-password',
+        '/profile',
+        '/password'
     ];
 }
